@@ -2,8 +2,7 @@
 build
 working
 test_output
-data/ver
-MANIFEST
+*/data/ver
 dist
 *-env
 *.egg-info
