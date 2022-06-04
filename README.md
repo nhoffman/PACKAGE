@@ -1,14 +1,15 @@
-# PACKAGE - a minimal Python package template
+# PACKAGE
 
-Quickstart:
-
-Create a new package in ``~/src/mypackage``:
+## Local installation
 
 ```
-./new.sh mypackage
+python3 -m venv py3-env
+source py3-env/bin/activate
+pip install -e .
 ```
 
-Features:
+The above command installs the CLI entrypoint ``PACKAGE``. You can also execute the CLI using
 
-- use git tags as version numbers
-- entry point with subcommands
+```
+./entrypoint.py -h
+```
