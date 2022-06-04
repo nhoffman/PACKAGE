@@ -19,14 +19,13 @@ cd $packagename
 tar -xf $packagename.tgz
 mv PACKAGE.py $packagename.py
 mv src/PACKAGE src/$packagename
-touch README.md
 
-for fname in $(find . -name '*.py'); do
+for fname in $(find . -name '*.{py,md}'); do
     sed -i -e "s/PACKAGE/${packagename}/g" "$fname"
     rm "${fname}-e"
 done
 
-rm $packagename.tgz new.sh README.md
+rm $packagename.tgz new.sh
 
 git init .
 git add .
