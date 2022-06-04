@@ -1,8 +1,6 @@
 import os
 import subprocess
-
-from distutils.core import Command
-from setuptools import setup, find_packages
+import setuptools
 
 subprocess.call(
     ('mkdir -p PACKAGE/data && '
@@ -13,44 +11,47 @@ subprocess.call(
 
 from PACKAGE import __version__
 
-
-class CheckVersion(Command):
-    description = 'Confirm that the stored package version is correct'
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        with open('PACKAGE/data/ver') as f:
-            stored_version = f.read().strip()
-
-        git_version = subprocess.check_output(
-            ['git', 'describe', '--tags', '--dirty']).strip()
-
-        assert stored_version == git_version
-        print('the current version is', stored_version)
-
-
 package_data = ['data/*']
 
-params = {'author': 'Your name',
-          'author_email': 'Your email',
-          'description': 'Package description',
-          'name': 'PACKAGE',
-          'packages': find_packages(),
-          'package_dir': {'PACKAGE': 'PACKAGE'},
-          'entry_points': {
-              'console_scripts': ['PACKAGE = PACKAGE.scripts.main:main']
-          },
-          'version': __version__,
-          'package_data': {'PACKAGE': package_data},
-          'test_suite': 'tests',
-          'cmdclass': {'check_version': CheckVersion},
-          'install_requires': [
-          ]}
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
-setup(**params)
+setuptools.setup(
+    name="PACKAGE",
+    version=__version__,
+    author="Example Author",
+    author_email="author@example.com",
+    description="A small example package",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    # url="https://github.com/pypa/sampleproject",
+    # project_urls={
+    #     "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
+    # },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    package_dir={'': 'src'},
+    packages=setuptools.find_packages(where="src"),
+    python_requires=">=3.8",
+)
+
+# params = {'author': 'Your name',
+#           'author_email': 'Your email',
+#           'description': 'Package description',
+#           'name': 'PACKAGE',
+#           'packages': setuptools.find_packages(),
+#           'package_dir': {'PACKAGE': 'PACKAGE'},
+#           'entry_points': {
+#               'console_scripts': ['PACKAGE = PACKAGE.scripts.main:main']
+#           },
+#           'version': __version__,
+#           'package_data': {'PACKAGE': package_data},
+#           'test_suite': 'tests',
+#           'cmdclass': {'check_version': CheckVersion},
+#           'install_requires': [
+#           ]}
+
+# setuptools.setup(**params)

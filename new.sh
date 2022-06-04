@@ -18,7 +18,8 @@ git -C PACKAGE archive master | gzip > $packagename/$packagename.tgz
 cd $packagename
 tar -xf $packagename.tgz
 mv PACKAGE.py $packagename.py
-mv PACKAGE $packagename
+mv src/PACKAGE src/$packagename
+touch README.md
 
 for fname in $(find . -name '*.py'); do
     sed -i -e "s/PACKAGE/${packagename}/g" "$fname"
