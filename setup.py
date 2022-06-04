@@ -35,7 +35,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    package_dir={'': 'src'},
+    package_dir={'': 'src', 'PACKAGE': 'src/PACKAGE'},
     package_data={'PACKAGE': package_data},
     packages=setuptools.find_packages(where="src"),
     entry_points={
